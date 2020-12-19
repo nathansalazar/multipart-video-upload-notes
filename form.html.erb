@@ -1,0 +1,47 @@
+<%= form_with(model: model_with_attached_video, local: true) do |form| %>
+	<div class="input-field col s12 m6 l6">
+		<%= td.text_field :title, required: true %>
+		<%= label_tag 'model_with_attached_video[title]', 'Title' %>
+	</div>
+
+  <div id="recorder-container" class="card-content">
+    <!-- loader -->
+		<div class = "preloader-wrapper big active loader hide">
+			<div class = "spinner-layer spinner-blue-only">
+				<div class = "circle-clipper left">
+					<div class = "circle"></div>
+				</div>
+					
+				<div class = "gap-patch">
+					<div class = "circle"></div>
+				</div>
+					
+				<div class = "circle-clipper right">
+					<div class = "circle"></div>
+				</div>
+			</div>
+		</div>
+		<!-- loader -->
+
+    <div id="formdata" class="btn-section">
+      <button type="button" class="btn record" id="record-button" onclick="VideoStream.startRecording(this.id)">Record</button>
+      <button type="button" class="btn pause" id="pause-button" disabled="disabled" onclick="VideoStream.pauseRecording(this.id)">Pause</button>
+      <button type="button" class="btn resume hide" id="resume-button" disabled="disabled" onclick="VideoStream.resumeRecording(this.id)">Resume</button>
+      <button type="button" class="btn stop" id="stop-button" disabled="disabled" onclick="VideoStream.stopRecording(this.id)">Stop</button>
+    </div>
+  </div>
+
+  <br />
+
+  <div>
+  <%# Hidden fields for file details %>
+    <%= hidden_field_tag 'filename' %>
+    <%= hidden_field_tag 'content_type' %>
+    <%= hidden_field_tag 'byte_size' %>
+    <%= hidden_field_tag 'checksum' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit id: 'submit-button', disabled: true %>
+  </div>
+<% end %>
