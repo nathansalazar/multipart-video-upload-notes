@@ -10,6 +10,6 @@ Afterwards, you need to set the `AWS_POOL_ID` environment variable.
 
 ### Rails
 
-My use case was working in Rails with a model that has an attached video via ActiveStorage. This caused a few issues regarding the checksum of the stitched-together file, but I ultimately discovered I didn't need it for anything I was doing; we are still able to get a download link for the video file.
+My use case was working in Rails with a model that has an attached video via ActiveStorage. This caused a few issues regarding the checksum of the stitched-together file, but I ultimately discovered I didn't need it for anything I was doing; we are still able to get a download link for the video file. The only thing to do is prevent the automatic `VideoAnalyzer` from running, since this will throw an error if the checksum doesn't match. In `config/application.rb` I added this: `config.active_storage.analyzers.delete ActiveStorage::Analyzer::VideoAnalyzer`.
 
 I also used the [gon gem](https://github.com/gazay/gon) to handle passing my environment variables to javascript.
